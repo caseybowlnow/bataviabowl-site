@@ -1,0 +1,17 @@
+name: Mirror bataviabowl.com
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 mirror.py
+      - run: |
+          git config user.name "BowlNow Site Bot"
+          git config user.email "casey@bowlnow.com"
+          git add -A
+          git commit -m "Mirror bataviabowl.com to static HTML" || echo "nothing to commit"
+          git push
