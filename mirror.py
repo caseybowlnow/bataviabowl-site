@@ -115,7 +115,8 @@ def transform(page, route):
     page = re.sub(r"<script\b[^>]*>.*?</script>", "", page, flags=re.S)
     page = re.sub(r"<script\b[^>]*/>", "", page)
     page = re.sub(r'<link rel="modulepreload"[^>]*>', "", page)
-    page = re.sub(r'<aside id="lovable-badge".*?</aside>', "", page, flags=re.S)
+    page = re.sub(r'<aside\s+id="lovable-badge".*?</aside>', "", page, flags=re.S)
+    page = re.sub(r'content="https://[^"]*lovable\.app[^"]*\.png"', 'content="%s/images/hero-lanes.png"' % ORIGIN, page)
     page = re.sub(r"<style\b[^>]*>(?:(?!</style>).)*lovable-badge.*?</style>", "", page, flags=re.S)
 
     # Same-origin assets -> local files.
